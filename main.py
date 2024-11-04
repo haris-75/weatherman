@@ -1,7 +1,6 @@
 import sys
 
 from parsers.weather_parser import WeatherParser
-
 from calculators.weather_calculator import WeatherCalculator
 from reports.report_generator import WeatherReportGenerator
 
@@ -11,21 +10,39 @@ def main():
         return
 
     directory_path = sys.argv[1]
-    year = sys.argv[3]
+    option = sys.argv[2]
+
     parser = WeatherParser(directory_path)
     readings = parser.parse_files()
 
-    filtered_readings = [r for r in readings if r.date.year == int(year)]
+    if option == '-e': 
+        year = int(sys.argv[3])
+        yearly_readings = [r for r in readings if r.date.year == year]
+        
+        if not yearly_readings:
+            print(f"No data available for the year {year}.")
+            return
 
-    if not filtered_readings:
-        print(f"No data available for the year {year}.")
-        return
-    
-    calculator = WeatherCalculator(filtered_readings)
-    stats = calculator.calculate_yearly()
+        calculator = WeatherCalculator(yearly_readings)
+        stats = calculator.calculate_yearly_statistics()
 
-    report_generator = WeatherReportGenerator()
-    report_generator.generate_yearly_report(stats)
+        report_generator = WeatherReportGenerator()
+        report_generator.generate_yearly_report(stats)
+
+    elif option == '-a': 
+        year, month = map(int, sys.argv[3].split('/'))
+        monthly_readings = [r for r in readings if r.date.year == year and r.date.month == month]
+        
+        if not monthly_readings:
+            print(f"No data available for {year}/{month}.")
+            return
+
+        calculator = WeatherCalculator(monthly_readings)
+        stats = calculator.calculate_monthly_statistics()
+
+        report_generator = WeatherReportGenerator()
+        report_generator.generate_monthly_report(stats)
+
 
 
 if __name__ == "__main__":

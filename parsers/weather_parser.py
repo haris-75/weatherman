@@ -19,7 +19,8 @@ class WeatherParser:
                         max_temp = int(row['Max TemperatureC'])
                         min_temp = int(row['Min TemperatureC'])
                         humidity = int(row['Max Humidity'])
-                        readings.append(WeatherReading(reading_date, max_temp, min_temp, humidity))
+                        mean_humidity = int(row[' Mean Humidity'].strip())
+                        readings.append(WeatherReading(reading_date, max_temp, min_temp, humidity, mean_humidity))
                     except (ValueError, KeyError):
                         continue
         return readings
