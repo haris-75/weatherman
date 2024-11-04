@@ -1,8 +1,10 @@
+from datetime import date
+
 class WeatherStatistics:
     def __init__(self):
         self.highest_temp = None
-        self.highest_temp_date = None
+        self.highest_temp_day = None
         self.lowest_temp = None
-        self.lowest_temp_date = None
-        self.most_humid = None
-        self.most_humid_date = None
+        self.lowest_temp_day = None
+        self.highest_humidity = None
+        self.humid_day = None

@@ -1,8 +1,8 @@
-import datetime
+from datetime import date
 
 class WeatherReading:
-    def __init__(self, date: datetime.date, temperature_high: int, temperature_low: int, humidity: int):
-        self.date = date
-        self.temperature_high = temperature_high
-        self.temperature_low = temperature_low
+    def __init__(self, reading_date: date, max_temp: int, min_temp: int, humidity: int):
+        self.date = reading_date
+        self.max_temp = max_temp
+        self.min_temp = min_temp
         self.humidity = humidity
