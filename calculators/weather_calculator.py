@@ -1,13 +1,13 @@
 
 from models.weather_reading import WeatherReading
-from models.weather_statistics import WeatherStatistics
+from models.weather_statistics import YearlyStatistics
 
 class WeatherCalculator:
     def __init__(self, readings):
         self.readings = readings
 
-    def calculate_statistics(self):
-        stats = WeatherStatistics()
+    def calculate_yearly(self):
+        stats = YearlyStatistics()
         for reading in self.readings:
             if stats.highest_temp is None or reading.max_temp > stats.highest_temp:
                 stats.highest_temp = reading.max_temp

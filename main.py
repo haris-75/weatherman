@@ -22,10 +22,10 @@ def main():
         return
     
     calculator = WeatherCalculator(filtered_readings)
-    stats = calculator.calculate_statistics()
+    stats = calculator.calculate_yearly()
 
     report_generator = WeatherReportGenerator()
-    report_generator.generate_report(stats)
+    report_generator.generate_yearly_report(stats)
 
 
 if __name__ == "__main__":
