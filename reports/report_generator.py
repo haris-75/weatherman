@@ -1,4 +1,5 @@
 from models.weather_statistics import YearlyStatistics, MonthlyStatistics
+import calendar
 
 
 class WeatherReportGenerator:
@@ -13,7 +14,7 @@ class WeatherReportGenerator:
         print(f"Average Mean Humidity: {stats.avg_mean_humidity}%")
 
     def generate_console_bar_chart(self, daily_stats, year, month, combined=True):
-        print(f"{month:02d} {year}")
+        print(f"\n{calendar.month_name[month]} {year}")
         for stats in daily_stats:
             day = stats['date'].day
             max_temp = stats['max_temp']
