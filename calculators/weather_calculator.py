@@ -1,5 +1,4 @@
 
-from models.weather_reading import WeatherReading
 from models.weather_statistics import YearlyStatistics, MonthlyStatistics
 
 class WeatherCalculator:
