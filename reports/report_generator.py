@@ -1,5 +1,6 @@
 from models.weather_statistics import YearlyStatistics, MonthlyStatistics
 
+
 class WeatherReportGenerator:
     def generate_yearly_report(self, stats: YearlyStatistics):
         print(f"Highest: {stats.highest_temp}C on {stats.highest_temp_day.strftime('%B %d')}")
@@ -11,7 +12,7 @@ class WeatherReportGenerator:
         print(f"Lowest Average: {stats.avg_lowest_temp}C")
         print(f"Average Mean Humidity: {stats.avg_mean_humidity}%")
 
-    def generate_console_bar_chart(self, daily_stats, year, month, combined=False):
+    def generate_console_bar_chart(self, daily_stats, year, month, combined=True):
         print(f"{month:02d} {year}")
         for stats in daily_stats:
             day = stats['date'].day
@@ -22,7 +23,7 @@ class WeatherReportGenerator:
             min_bar = '+' * min_temp if min_temp >= 0 else '-' * abs(min_temp)
 
             if combined:
-                print(f"{day:02d} {min_bar} {min_temp}C - {max_temp}C {max_bar}")
+                print(f"{day:02d} \033[1;31m{min_bar}\033[0m \033[1;32m{max_bar}\033[0m {min_temp}C - {max_temp}C")
             else:
-                print(f"{day:02d} {max_bar} {max_temp}C")
-                print(f"{day:02d} {min_bar} {min_temp}C")
+                print(f"{day:02d} \033[1;32m{max_bar}\033[0m {max_temp}C")
+                print(f"{day:02d} \033[1;31m{min_bar}\033[0m {min_temp}C")
