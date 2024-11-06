@@ -6,7 +6,7 @@ from reports.report_generator import WeatherReportGenerator
 
 def main():
     if len(sys.argv) < 4:
-        print("Usage: python3 main.py /path/to/files-dir -e <year>")
+        print("Usage: python3 weatherman.py /path/to/files-dir -e <year>")
         return
 
     directory_path = sys.argv[1]
