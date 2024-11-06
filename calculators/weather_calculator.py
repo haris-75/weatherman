@@ -40,4 +40,15 @@ class WeatherCalculator:
         stats.avg_lowest_temp = avg_lowest_temp
         stats.avg_mean_humidity = avg_mean_humidity
         return stats
+    
+    def calculate_daily_temperatures(self):
+        daily_stats = []
+        for reading in self.readings:
+            if reading.max_temp is not None and reading.min_temp is not None:
+                daily_stats.append({
+                    'date': reading.date,
+                    'max_temp': reading.max_temp,
+                    'min_temp': reading.min_temp
+                })
+        return daily_stats
  
