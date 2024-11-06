@@ -30,7 +30,12 @@ def main():
         report_generator.generate_yearly_report(stats)
 
     elif option == '-a': 
-        year, month = map(int, sys.argv[3].split('/'))
+        try:
+            year, month = map(int, sys.argv[3].split('/'))
+        except ValueError:
+            print("Invalid format for year/month. Please use the format 'YYYY/MM', e.g., '2004/6'.")
+            return
+
         monthly_readings = [r for r in readings if r.date.year == year and r.date.month == month]
         
         if not monthly_readings:
