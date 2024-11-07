@@ -12,7 +12,7 @@ class WeatherCalculator:
         for reading in self.temprature_readings:
             if not highest_temp or reading.max_temp > highest_temp:
                 highest_temp = reading.max_temp
-                highest_temp_day = reading.date
+                highest_temp_day = reading.recorded_date
         return highest_temp, highest_temp_day
     
     def _calculate_lowest_temperature_and_day(self):
@@ -21,7 +21,7 @@ class WeatherCalculator:
         for reading in self.temprature_readings:
             if not lowest_temp or reading.min_temp < lowest_temp:
                 lowest_temp = reading.min_temp
-                lowest_temp_day = reading.date
+                lowest_temp_day = reading.recorded_date
         return lowest_temp, lowest_temp_day
     
     def _calculate_highest_humidity_and_day(self):
@@ -30,7 +30,7 @@ class WeatherCalculator:
         for reading in self.temprature_readings:
             if not highest_humidity or reading.humidity > highest_humidity:
                 highest_humidity = reading.humidity
-                highest_humidity_day = reading.date
+                highest_humidity_day = reading.recorded_date
         return highest_humidity, highest_humidity_day
 
 
@@ -62,7 +62,7 @@ class WeatherCalculator:
         for reading in self.temprature_readings:
             if reading.max_temp is not None and reading.min_temp is not None:
                 daily_stats.append({
-                    'date': reading.date,
+                    'recorded_date': reading.recorded_date,
                     'max_temp': reading.max_temp,
                     'min_temp': reading.min_temp
                 })

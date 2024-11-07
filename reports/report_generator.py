@@ -10,14 +10,14 @@ class WeatherReportGenerator:
         print(f"Humidity: {stats.highest_humidity}% on {stats.humid_day.strftime('%B %d')}")
     
     def generate_monthly_report(self, stats: MonthlyStatistics):
-        print(f"Highest Average: {stats.avg_highest_temp}C")
-        print(f"Lowest Average: {stats.avg_lowest_temp}C")
-        print(f"Average Mean Humidity: {stats.avg_mean_humidity}%")
+        print(f"Highest Average: {int(stats.avg_highest_temp)}C")
+        print(f"Lowest Average: {int(stats.avg_lowest_temp)}C")
+        print(f"Average Mean Humidity: {int(stats.avg_mean_humidity)}%")
 
     def generate_console_bar_chart(self, daily_stats, year, month, combined=True):
         print(f"\n{calendar.month_name[month]} {year}")
         for stats in daily_stats:
-            day = stats['date'].day
+            day = stats['recorded_date'].day
             max_temp = stats['max_temp']
             min_temp = stats['min_temp']
             

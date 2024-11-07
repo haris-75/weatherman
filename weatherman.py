@@ -38,7 +38,7 @@ class Weatherman:
 
     def _generate_report_for_year(self, year, temprature_readings):
         report_generator = WeatherReportGenerator()
-        yearly_readings = [r for r in temprature_readings if r.date.year == year]
+        yearly_readings = [r for r in temprature_readings if r.recorded_date.year == year]
             
         if not yearly_readings:
             print(f"No data available for the year {year}.")
@@ -50,7 +50,7 @@ class Weatherman:
 
     def _generate_report_for_month(self, year, month, temprature_readings, option):
         report_generator = WeatherReportGenerator()
-        monthly_readings = [r for r in temprature_readings if r.date.year == year and r.date.month == month] 
+        monthly_readings = [r for r in temprature_readings if r.recorded_date.year == year and r.recorded_date.month == month] 
         if not monthly_readings:
             print(f"No data available for {year}/{month}.")
             return
