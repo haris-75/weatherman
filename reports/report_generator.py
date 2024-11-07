@@ -1,4 +1,5 @@
 from models.weather_statistics import YearlyStatistics, MonthlyStatistics
+from constants import RED_COLOR, GREEN_COLOR, RESET_COLOR
 import calendar
 
 
@@ -20,11 +21,14 @@ class WeatherReportGenerator:
             max_temp = stats['max_temp']
             min_temp = stats['min_temp']
             
-            max_bar = '+' * max_temp if max_temp >= 0 else '-' * abs(max_temp)
-            min_bar = '+' * min_temp if min_temp >= 0 else '-' * abs(min_temp)
+            max_bar = self._get_bars(max_temp)
+            min_bar = self._get_bars(min_temp)
 
             if combined:
-                print(f"{day:02d} \033[1;31m{min_bar}\033[0m \033[1;32m{max_bar}\033[0m {min_temp}C - {max_temp}C")
+                print(f"{day:02d} {RED_COLOR}{min_bar}{RESET_COLOR} {GREEN_COLOR}{max_bar}{RESET_COLOR} {min_temp}C - {max_temp}C")
             else:
-                print(f"{day:02d} \033[1;32m{max_bar}\033[0m {max_temp}C")
-                print(f"{day:02d} \033[1;31m{min_bar}\033[0m {min_temp}C")
+                print(f"{day:02d} {GREEN_COLOR}{max_bar}{RESET_COLOR} {max_temp}C")
+                print(f"{day:02d} {RED_COLOR}{min_bar}{RESET_COLOR} {min_temp}C")
+
+    def _get_bars(self, temprature):
+        return '+' * temprature if temprature >= 0 else '-' * abs(temprature)
