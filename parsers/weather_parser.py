@@ -12,6 +12,7 @@ class WeatherParser:
         for filename in os.listdir(self.directory_path):
             file_path = os.path.join(self.directory_path, filename)
             temprature_readings.extend(self._parse_file(file_path))
+            
         return temprature_readings
 
     def _parse_file(self, file_path):
@@ -26,10 +27,10 @@ class WeatherParser:
             reading_date = row.get('PKT') or row.get('PKST')
             if not reading_date:
                 return None 
-            max_temp = row['Max TemperatureC']
-            min_temp = row['Min TemperatureC']
+            max_temprature = row['Max TemperatureC']
+            min_temprature = row['Min TemperatureC']
             humidity = row['Max Humidity']
             mean_humidity = row[' Mean Humidity'].strip()
-            return WeatherReading(reading_date, max_temp, min_temp, humidity, mean_humidity)
+            return WeatherReading(reading_date, max_temprature, min_temprature, humidity, mean_humidity)
         except (ValueError, KeyError):
             return None
