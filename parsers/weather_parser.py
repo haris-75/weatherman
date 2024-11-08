@@ -1,5 +1,6 @@
-import os
+
 import csv
+import os
 from models.weather_reading import WeatherReading
 
 class WeatherParser:

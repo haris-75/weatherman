@@ -2,7 +2,8 @@
 from statistics import mean
 from models.weather_statistics import YearlyStatistics, MonthlyStatistics
 
-class WeatherCalculator:
+
+class WeatherStatsCalculator:
     def __init__(self, temprature_readings):
         self.temprature_readings = temprature_readings
 
@@ -33,7 +34,6 @@ class WeatherCalculator:
                 highest_humidity_day = reading.recorded_date
         return highest_humidity, highest_humidity_day
 
-
     def calculate_yearly_statistics(self):
         stats = YearlyStatistics()
         stats.highest_temp, stats.highest_temp_day = self._calculate_highest_temperature_and_day()
@@ -42,7 +42,6 @@ class WeatherCalculator:
         return stats
     
     def calculate_monthly_statistics(self):
-
         max_temps = list(map(lambda reading: reading.max_temp, self.temprature_readings))
         min_temps = list(map(lambda reading: reading.min_temp, self.temprature_readings))
         mean_humidities = list(map(lambda reading: reading.mean_humidity, self.temprature_readings))
@@ -67,4 +66,6 @@ class WeatherCalculator:
                     'min_temp': reading.min_temp
                 })
         return daily_stats
+ 
+ 
  

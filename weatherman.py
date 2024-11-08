@@ -1,17 +1,14 @@
 
-from validator.validator import Validator
 from parsers.weather_parser import WeatherParser
-
-from calculators.weather_calculator import WeatherCalculator
+from calculators.weather_stats_calculator import WeatherStatsCalculator
 from reports.report_generator import WeatherReportGenerator
 
-from helpers import invalid_format_provided
+from helpers import invalid_format_provided, validate_date
+
 
 class Weatherman:
 
     def __init__(self, arguments):
-        validator = Validator(arguments)
-        self.validator = validator
         self.arguments = arguments
         self.directory_path = arguments[1]
 
@@ -20,12 +17,13 @@ class Weatherman:
         temprature_readings = parser.parse_files()
 
         for i in range(2, len(self.arguments), 2):
-            valid, result = self.validator.validate_option_and_date(i)
+            valid, result = validate_date(self.arguments[i+1])
             if not valid:
                 invalid_format_provided(result)
                 return
 
-            option, year, month = result
+            option = self.arguments[i]
+            year, month = result
             if month and (option == '-a' or option == '-c'):
                 print(f"\nGenerating report for year {year} and month {month} with option {option}")
                 self._generate_report_for_month(year, month, temprature_readings, option)
@@ -44,7 +42,7 @@ class Weatherman:
             print(f"No data available for the year {year}.")
             return
 
-        calculator = WeatherCalculator(yearly_readings)
+        calculator = WeatherStatsCalculator(yearly_readings)
         stats = calculator.calculate_yearly_statistics()
         report_generator.generate_yearly_report(stats)
 
@@ -55,7 +53,7 @@ class Weatherman:
             print(f"No data available for {year}/{month}.")
             return
         
-        calculator = WeatherCalculator(monthly_readings)
+        calculator = WeatherStatsCalculator(monthly_readings)
 
         if option == '-a': 
             stats = calculator.calculate_monthly_statistics()
@@ -64,4 +62,5 @@ class Weatherman:
         elif option == '-c':
             daily_stats = calculator.calculate_daily_temperatures()
             report_generator.generate_console_bar_chart(daily_stats, year, month)
+
 
