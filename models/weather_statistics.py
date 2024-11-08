@@ -1,8 +1,15 @@
-class WeatherStatistics:
+from datetime import date
+
+class YearlyStatistics:
     def __init__(self):
-        self.highest_temp = None
-        self.highest_temp_date = None
-        self.lowest_temp = None
-        self.lowest_temp_date = None
-        self.most_humid = None
-        self.most_humid_date = None
+        self.highest_temprature = None
+        self.highest_temprature_day = None
+        self.lowest_temprature = None
+        self.lowest_temprature_day = None
+        self.highest_humidity = None
+        self.humid_day = None
+class MonthlyStatistics:
+    def __init__(self):
+        self.avg_highest_temprature = None
+        self.avg_lowest_temprature = None
+        self.avg_mean_humidity = None
